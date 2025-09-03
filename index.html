@@ -1,616 +1,574 @@
-<!DOCTYPE html>\
-<html lang="en">\
-<head>\
-    <meta charset="UTF-8">\
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
-    <title>The Connection Cure</title>\
-    <style>\
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap');\
-        \
-        * \{\
-            margin: 0;\
-            padding: 0;\
-            box-sizing: border-box;\
-        \}\
-        \
-        body \{\
-            font-family: 'Montserrat', sans-serif;\
-            color: #2E2E2E;\
-            line-height: 1.5;\
-        \}\
-        \
-        .page \{\
-            width: 8.5in;\
-            height: 11in;\
-            margin: 0 auto 20px;\
-            background: white;\
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);\
-            page-break-after: always;\
-            position: relative;\
-            overflow: hidden;\
-        \}\
-        \
-        .page:last-child \{\
-            margin-bottom: 0;\
-        \}\
-        \
-        /* Page 1 - Cover + Problem Focused */\
-        .cover-intro \{\
-            background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 30%, #81C784 70%, #A5D6A7 100%);\
-            color: #2E2E2E;\
-            padding: 2rem;\
-            display: flex;\
-            flex-direction: column;\
-            height: 100%;\
-            position: relative;\
-        \}\
-        \
-        .cover-intro::before \{\
-            content: '';\
-            position: absolute;\
-            top: 0;\
-            left: 0;\
-            right: 0;\
-            bottom: 0;\
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,50 Q30,20 50,50 T90,50" stroke="%23ffffff20" stroke-width="2" fill="none"/><circle cx="20" cy="30" r="1" fill="%23ffffff15"/><circle cx="80" cy="70" r="1.5" fill="%23ffffff10"/></svg>');\
-            opacity: 0.3;\
-        \}\
-        \
-        .header-section \{\
-            text-align: center;\
-            margin-bottom: 1rem;\
-            z-index: 2;\
-            position: relative;\
-        \}\
-        \
-        .header-section h1 \{\
-            font-family: 'Bebas Neue', cursive;\
-            font-size: 3.2rem;\
-            margin-bottom: 0.5rem;\
-            letter-spacing: 1px;\
-            color: white;\
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);\
-        \}\
-        \
-        .header-section h2 \{\
-            font-size: 1.3rem;\
-            font-weight: 400;\
-            margin-bottom: 0.8rem;\
-            color: #2E2E2E;\
-        \}\
-        \
-        .pain-hook \{\
-            background: rgba(255, 255, 255, 0.95);\
-            padding: 1.2rem;\
-            border-radius: 15px;\
-            margin-bottom: 1.5rem;\
-            text-align: center;\
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);\
-            z-index: 2;\
-            position: relative;\
-        \}\
-        \
-        .pain-hook h3 \{\
-            font-size: 1.3rem;\
-            color: #4CAF50;\
-            margin-bottom: 1rem;\
-            font-weight: 700;\
-        \}\
-        \
-        .pain-points \{\
-            text-align: left;\
-            margin-bottom: 1rem;\
-        \}\
-        \
-        .pain-points li \{\
-            margin-bottom: 0.5rem;\
-            font-size: 1rem;\
-            color: #555;\
-            list-style: none;\
-            padding-left: 1.5rem;\
-            position: relative;\
-        \}\
-        \
-        .pain-points li::before \{\
-            content: '\uc0\u55357 \u56493 ';\
-            position: absolute;\
-            left: 0;\
-        \}\
-        \
-        .solution-text \{\
-            background: linear-gradient(135deg, #4CAF50, #66BB6A);\
-            color: white;\
-            padding: 1.2rem;\
-            border-radius: 10px;\
-            margin-bottom: 1rem;\
-            text-align: center;\
-            z-index: 2;\
-            position: relative;\
-        \}\
-        \
-        .solution-text strong \{\
-            font-size: 1.1rem;\
-        \}\
-        \
-        .stats-box \{\
-            background: rgba(255, 255, 255, 0.9);\
-            padding: 1rem;\
-            border-radius: 10px;\
-            margin-bottom: 1rem;\
-            text-align: center;\
-            z-index: 2;\
-            position: relative;\
-        \}\
-        \
-        .stats-box .stat \{\
-            font-size: 1.1rem;\
-            font-weight: 600;\
-            color: #4CAF50;\
-        \}\
-        \
-        .cover-footer \{\
-            text-align: center;\
-            font-size: 0.9rem;\
-            font-weight: 600;\
-            color: #2E2E2E;\
-            z-index: 2;\
-            position: relative;\
-        \}\
-        \
-        /* Page 2 - Solution + Steps */\
-        .content-page \{\
-            padding: 2rem;\
-            height: 100%;\
-            display: flex;\
-            flex-direction: column;\
-            background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);\
-        \}\
-        \
-        .section-header \{\
-            font-family: 'Bebas Neue', cursive;\
-            font-size: 2.2rem;\
-            color: #4CAF50;\
-            text-align: center;\
-            margin-bottom: 0.5rem;\
-            border-bottom: 3px solid #4CAF50;\
-            padding-bottom: 0.5rem;\
-        \}\
-        \
-        .section-subtitle \{\
-            text-align: center;\
-            font-style: italic;\
-            color: #666;\
-            margin-bottom: 1.5rem;\
-        \}\
-        \
-        .method-intro \{\
-            background: white;\
-            padding: 1.5rem;\
-            border-radius: 15px;\
-            margin-bottom: 1.5rem;\
-            border-left: 5px solid #4CAF50;\
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.1);\
-        \}\
-        \
-        .method-intro h3 \{\
-            font-family: 'Bebas Neue', cursive;\
-            font-size: 1.5rem;\
-            color: #4CAF50;\
-            margin-bottom: 0.8rem;\
-        \}\
-        \
-        .method-intro p \{\
-            margin-bottom: 0.8rem;\
-            line-height: 1.6;\
-        \}\
-        \
-        .accessibility-note \{\
-            background: rgba(76, 175, 80, 0.1);\
-            padding: 1rem;\
-            border-radius: 10px;\
-            margin-bottom: 1.5rem;\
-            border-left: 4px solid #4CAF50;\
-        \}\
-        \
-        .accessibility-note h4 \{\
-            color: #4CAF50;\
-            font-weight: 600;\
-            margin-bottom: 0.5rem;\
-        \}\
-        \
-        .accessibility-note ul \{\
-            list-style: none;\
-            padding: 0;\
-        \}\
-        \
-        .accessibility-note li \{\
-            margin-bottom: 0.3rem;\
-            font-size: 0.9rem;\
-            padding-left: 1.2rem;\
-            position: relative;\
-        \}\
-        \
-        .accessibility-note li::before \{\
-            content: '\uc0\u10003 ';\
-            position: absolute;\
-            left: 0;\
-            color: #4CAF50;\
-        \}\
-        \
-        .steps-grid \{\
-            display: grid;\
-            grid-template-columns: 1fr 1fr 1fr;\
-            gap: 1rem;\
-            margin-bottom: 1.5rem;\
-        \}\
-        \
-        .step-card \{\
-            background: white;\
-            padding: 1.2rem;\
-            border-radius: 15px;\
-            border-top: 4px solid #4CAF50;\
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.1);\
-            text-align: center;\
-        \}\
-        \
-        .step-number \{\
-            background: #4CAF50;\
-            color: white;\
-            width: 30px;\
-            height: 30px;\
-            border-radius: 50%;\
-            display: flex;\
-            align-items: center;\
-            justify-content: center;\
-            font-weight: 700;\
-            margin: 0 auto 0.8rem;\
-        \}\
-        \
-        .step-card h4 \{\
-            font-family: 'Bebas Neue', cursive;\
-            font-size: 1.1rem;\
-            color: #4CAF50;\
-            margin-bottom: 0.5rem;\
-            line-height: 1.2;\
-        \}\
-        \
-        .step-card p \{\
-            font-size: 0.85rem;\
-            color: #555;\
-            line-height: 1.4;\
-        \}\
-        \
-        .sample-prompt \{\
-            background: linear-gradient(135deg, #4CAF50, #66BB6A);\
-            color: white;\
-            padding: 1.2rem;\
-            border-radius: 15px;\
-        \}\
-        \
-        .sample-prompt h4 \{\
-            font-family: 'Bebas Neue', cursive;\
-            font-size: 1.3rem;\
-            margin-bottom: 0.8rem;\
-            text-align: center;\
-        \}\
-        \
-        .prompt-examples \{\
-            background: rgba(255, 255, 255, 0.1);\
-            padding: 1rem;\
-            border-radius: 10px;\
-        \}\
-        \
-        .prompt-examples ul \{\
-            list-style: none;\
-            padding: 0;\
-        \}\
-        \
-        .prompt-examples li \{\
-            margin-bottom: 0.5rem;\
-            font-size: 0.9rem;\
-            padding-left: 1.2rem;\
-            position: relative;\
-        \}\
-        \
-        .prompt-examples li::before \{\
-            content: '\uc0\u55357 \u56492 ';\
-            position: absolute;\
-            left: 0;\
-        \}\
-        \
-        /* Page 3 - CTA with Urgency */\
-        .cta-page \{\
-            background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);\
-            color: white;\
-            padding: 2.5rem;\
-            text-align: center;\
-            display: flex;\
-            flex-direction: column;\
-            justify-content: center;\
-            height: 100%;\
-        \}\
-        \
-        .cta-page h1 \{\
-            font-family: 'Bebas Neue', cursive;\
-            font-size: 2.6rem;\
-            margin-bottom: 1rem;\
-            line-height: 1.1;\
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);\
-        \}\
-        \
-        .urgency-text \{\
-            background: rgba(255, 255, 255, 0.2);\
-            padding: 1rem;\
-            border-radius: 10px;\
-            margin-bottom: 1.5rem;\
-            font-weight: 600;\
-            border: 2px solid rgba(255, 255, 255, 0.3);\
-        \}\
-        \
-        .cta-page p \{\
-            font-size: 1.1rem;\
-            margin-bottom: 2rem;\
-            line-height: 1.6;\
-            max-width: 580px;\
-            margin-left: auto;\
-            margin-right: auto;\
-        \}\
-        \
-        .offer-container \{\
-            background: rgba(255, 255, 255, 0.15);\
-            border: 3px solid white;\
-            border-radius: 20px;\
-            padding: 2rem;\
-            margin-bottom: 1.5rem;\
-            backdrop-filter: blur(10px);\
-        \}\
-        \
-        .limited-badge \{\
-            background: #FF5722;\
-            color: white;\
-            padding: 0.5rem 1.5rem;\
-            border-radius: 25px;\
-            font-family: 'Bebas Neue', cursive;\
-            font-size: 1rem;\
-            margin-bottom: 1rem;\
-            display: inline-block;\
-            font-weight: 600;\
-            animation: pulse 2s infinite;\
-        \}\
-        \
-        @keyframes pulse \{\
-            0% \{ transform: scale(1); \}\
-            50% \{ transform: scale(1.05); \}\
-            100% \{ transform: scale(1); \}\
-        \}\
-        \
-        .offer-title \{\
-            font-family: 'Bebas Neue', cursive;\
-            font-size: 1.8rem;\
-            margin-bottom: 1rem;\
-        \}\
-        \
-        .price-comparison \{\
-            margin-bottom: 1.5rem;\
-        \}\
-        \
-        .price-highlight \{\
-            font-size: 2.2rem;\
-            font-weight: 700;\
-            margin-bottom: 0.3rem;\
-        \}\
-        \
-        .price-comparison-text \{\
-            font-size: 0.9rem;\
-            opacity: 0.9;\
-            margin-bottom: 1rem;\
-        \}\
-        \
-        .session-details \{\
-            background: rgba(255, 255, 255, 0.1);\
-            padding: 1rem;\
-            border-radius: 10px;\
-            margin-bottom: 1rem;\
-        \}\
-        \
-        .session-details h5 \{\
-            font-family: 'Bebas Neue', cursive;\
-            font-size: 1.2rem;\
-            margin-bottom: 0.5rem;\
-        \}\
-        \
-        .session-details ul \{\
-            list-style: none;\
-            padding: 0;\
-        \}\
-        \
-        .session-details li \{\
-            margin-bottom: 0.3rem;\
-            font-size: 0.9rem;\
-            padding-left: 1rem;\
-            position: relative;\
-        \}\
-        \
-        .session-details li::before \{\
-            content: '\uc0\u10003 ';\
-            position: absolute;\
-            left: 0;\
-            color: #E8F5E8;\
-        \}\
-        \
-        .pricing-options \{\
-            background: rgba(255, 255, 255, 0.1);\
-            padding: 1rem;\
-            border-radius: 10px;\
-            margin-bottom: 1rem;\
-            font-size: 0.9rem;\
-        \}\
-        \
-        .cta-button \{\
-            background: white;\
-            color: #4CAF50;\
-            font-family: 'Bebas Neue', cursive;\
-            font-size: 1.6rem;\
-            font-weight: 600;\
-            padding: 1rem 2.5rem;\
-            border: none;\
-            border-radius: 50px;\
-            cursor: pointer;\
-            text-transform: uppercase;\
-            letter-spacing: 1px;\
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);\
-            transition: all 0.3s ease;\
-        \}\
-        \
-        .cta-button:hover \{\
-            background: #f0f0f0;\
-            transform: translateY(-2px);\
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);\
-        \}\
-        \
-        .guarantee \{\
-            font-size: 0.9rem;\
-            margin-top: 1rem;\
-            opacity: 0.9;\
-        \}\
-        \
-        @media print \{\
-            .page \{\
-                margin: 0;\
-                box-shadow: none;\
-            \}\
-        \}\
-    </style>\
-</head>\
-<body>\
-    <!-- Page 1 - Problem-Focused Cover -->\
-    <div class="page cover-intro">\
-        <div class="header-section">\
-            <h1>The Connection Cure</h1>\
-            <h2>How 55 Minutes of Conversation Can End Loneliness at Any Age</h2>\
-        </div>\
-        \
-        <div class="pain-hook">\
-            <h3>When's the last time someone really listened to you?</h3>\
-            <ul class="pain-points">\
-                <li>Days go by without meaningful conversation?</li>\
-                <li>Friends and family always seem too busy to really talk?</li>\
-                <li>Feeling invisible in your own community?</li>\
-                <li>Missing the companionship and deep connection you once had?</li>\
-                <li>Scrolling through social media instead of having real conversations?</li>\
-                <li>Tired of the same surface-level small talk everywhere you go?</li>\
-            </ul>\
-        </div>\
-        \
-        <div class="solution-text">\
-            <strong>You're not invisible. You're just disconnected.</strong><br>\
-            And there's a simple solution that doesn't involve technology, expensive programs, or clinical settings.\
-        </div>\
-        \
-        <div class="stats-box">\
-            <div class="stat">Mayo Clinic: Regular social connection improves health as much as quitting smoking</div>\
-            <div style="font-size: 0.9rem; margin-top: 0.5rem;">Walking + meaningful conversation = the most underused wellness tool</div>\
-        </div>\
-        \
-        <div class="cover-footer">Coach E. Bell | Former Pro Athlete | Human Connection & Wellness Specialist</div>\
-    </div>\
-    \
-    <!-- Page 2 - The Method -->\
-    <div class="page content-page">\
-        <h2 class="section-header">The Step & Connect Method</h2>\
-        <p class="section-subtitle">"Connection happens one conversation at a time"</p>\
-        \
-        <div class="method-intro">\
-            <h3>Why This Works When Nothing Else Does</h3>\
-            <p><strong>No phones. No distractions. No judgment.</strong> Just two people walking and talking like neighbors used to do. Walking at a comfortable pace creates the perfect environment for authentic conversation and genuine human connection.</p>\
-            <p>I discovered this during my own life transition from professional sports. Traditional approaches felt impersonal. But walking and talking? That felt like coming home to what really matters \'97 human connection.</p>\
-        </div>\
-        \
-        <div class="accessibility-note">\
-            <h4>Designed for Everyone:</h4>\
-            <ul>\
-                <li>All ages and fitness levels welcome</li>\
-                <li>Walk at your own comfortable pace</li>\
-                <li>Park benches available for rest breaks</li>\
-                <li>Indoor locations available during inclement weather</li>\
-                <li>No athletic ability required</li>\
-                <li>Safe, well-lit community meeting locations</li>\
-            </ul>\
-        </div>\
-        \
-        <div class="steps-grid">\
-            <div class="step-card">\
-                <div class="step-number">1</div>\
-                <h4>\uc0\u55357 \u57014 \u8205 \u9792 \u65039  Gentle Movement<br>(First 10 mins)</h4>\
-                <p>Walk at conversation pace that's comfortable for you. No fitness pressure, just gentle movement that calms your mind.</p>\
-            </div>\
-            <div class="step-card">\
-                <div class="step-number">2</div>\
-                <h4>\uc0\u55357 \u56492  Meaningful Conversation<br>(30-35 mins)</h4>\
-                <p>Using thoughtful conversation starters that go beyond "How's the weather?" Real listening and genuine sharing.</p>\
-            </div>\
-            <div class="step-card">\
-                <div class="step-number">3</div>\
-                <h4>\uc0\u55358 \u56792  Reflection & Connection<br>(10 mins)</h4>\
-                <p>Process insights together, share what resonated, and leave feeling heard, valued, and less alone.</p>\
-            </div>\
-        </div>\
-        \
-        <div class="sample-prompt">\
-            <h4>Sample Conversation Starters We Explore:</h4>\
-            <div class="prompt-examples">\
-                <ul>\
-                    <li>"What's something you're looking forward to this week?"</li>\
-                    <li>"Tell me about a place that holds special memories for you"</li>\
-                    <li>"What's the best advice someone ever gave you?"</li>\
-                    <li>"When do you feel most content and peaceful?"</li>\
-                    <li>"What's something you'd like people to know about you?"</li>\
-                </ul>\
-            </div>\
-        </div>\
-    </div>\
-    \
-    <!-- Page 3 - Urgent CTA -->\
-    <div class="page cta-page">\
-        <h1>You Deserve To Be Heard</h1>\
-        \
-        <div class="urgency-text">\
-            \uc0\u55356 \u57119  Tampa Founding Program: Only 10 Connection Partners Needed\
-        </div>\
-        \
-        <p>You could spend months hoping someone will truly listen, years waiting for deeper friendships to develop naturally, or decades wondering why meaningful connection feels so rare. Or you could take one small step today.</p>\
-        \
-        <div class="offer-container">\
-            <div class="limited-badge">Founding Members</div>\
-            <div class="offer-title">Your First Step & Connect Session</div>\
-            \
-            <div class="price-comparison">\
-                <div class="price-highlight">$20</div>\
-                <div class="price-comparison-text">Compare to $150+ counseling session | Compare to another lonely evening at home</div>\
-            </div>\
-            \
-            <div class="session-details">\
-                <h5>What You Experience in 55 Minutes:</h5>\
-                <ul>\
-                    <li>Phone-free walking in a safe, comfortable Tampa location</li>\
-                    <li>Guided conversation with a caring, attentive listener</li>\
-                    <li>No judgment, no pressure, just genuine human connection</li>\
-                    <li>Personal insights and meaningful reflection</li>\
-                    <li>Leave feeling heard, valued, and less alone</li>\
-                </ul>\
-            </div>\
-            \
-            <div class="pricing-options">\
-                <strong>Flexible Options:</strong> Senior discounts available | Sliding scale for fixed incomes | Family members welcome to meet Coach E. Bell first\
-            </div>\
-        </div>\
-        \
-        <button class="cta-button">Reserve Your Connection</button>\
-        <div class="guarantee">If you don't feel more connected and heard, your session is completely free.</div>\
-        \
-        <p style="margin-top: 1.5rem; font-size: 1rem; opacity: 0.9;">\
-            Call (813) 555-STEP or Text "CONNECT" | StepAndConnect.com\
-        </p>\
-    </div>\
-</body>\
-</html>}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Conversation Cure</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #2E2E2E;
+            line-height: 1.5;
+        }
+        
+        .page {
+            width: 8.5in;
+            height: 11in;
+            margin: 0 auto 20px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            page-break-after: always;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Page 1 - Cover + Problem Focused */
+        .cover-intro {
+            background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 30%, #81C784 70%, #A5D6A7 100%);
+            color: #2E2E2E;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+        
+        .cover-intro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,50 Q30,20 50,50 T90,50" stroke="%23ffffff20" stroke-width="2" fill="none"/><circle cx="20" cy="30" r="1" fill="%23ffffff15"/><circle cx="80" cy="70" r="1.5" fill="%23ffffff10"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .header-section {
+            text-align: center;
+            margin-bottom: 1rem;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .header-section h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3.2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header-section h2 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+            color: #2E2E2E;
+        }
+        
+        .pain-hook {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.2rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            z-index: 2;
+            position: relative;
+        }
+        
+        .pain-hook h3 {
+            font-size: 1.3rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .pain-points {
+            text-align: left;
+            margin-bottom: 1rem;
+        }
+        
+        .pain-points li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: #555;
+            list-style: none;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .pain-points li::before {
+            content: '😔';
+            position: absolute;
+            left: 0;
+        }
+        
+        .solution-text {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .solution-text strong {
+            font-size: 1.1rem;
+        }
+        
+        .stats-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .stats-box .stat {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #4CAF50;
+        }
+        
+        .cover-footer {
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2E2E2E;
+            z-index: 2;
+            position: relative;
+        }
+        
+        /* Page 2 - Solution + Steps */
+        .content-page {
+            padding: 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+        }
+        
+        .section-header {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.2rem;
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .method-intro {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border-left: 5px solid #4CAF50;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.1);
+        }
+        
+        .method-intro h3 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.5rem;
+            color: #4CAF50;
+            margin-bottom: 0.8rem;
+        }
+        
+        .method-intro p {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .step-card {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 15px;
+            border-top: 4px solid #4CAF50;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.1);
+            text-align: center;
+        }
+        
+        .step-number {
+            background: #4CAF50;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 0.8rem;
+        }
+        
+        .step-card h4 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.1rem;
+            color: #4CAF50;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        
+        .step-card p {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.4;
+        }
+        
+        .sample-prompt {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            padding: 1.2rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+        
+        .sample-prompt h4 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+        
+        .prompt-examples {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        
+        .prompt-examples ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .prompt-examples li {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        
+        .prompt-examples li::before {
+            content: '💬';
+            position: absolute;
+            left: 0;
+        }
+        
+        .callout-box {
+            background: linear-gradient(135deg, #81C784 0%, #A5D6A7 100%);
+            color: #2E2E2E;
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            box-shadow: 0 4px 15px rgba(129, 199, 132, 0.3);
+        }
+        
+        /* Page 3 - CTA with Urgency */
+        .cta-page {
+            background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+            color: white;
+            padding: 2.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .cta-page h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .urgency-text {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .cta-page p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            max-width: 580px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .offer-container {
+            background: rgba(255, 255, 255, 0.15);
+            border: 3px solid white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .limited-badge {
+            background: #FF5722;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .offer-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .price-comparison {
+            margin-bottom: 1.5rem;
+        }
+        
+        .price-highlight {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        
+        .price-comparison-text {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .session-details {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .session-details h5 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .session-details ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .session-details li {
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+        
+        .session-details li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #E8F5E8;
+        }
+        
+        .cta-button {
+            background: white;
+            color: #4CAF50;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.6rem;
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .guarantee {
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+        
+        @media print {
+            .page {
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1 - Problem-Focused Cover -->
+    <div class="page cover-intro">
+        <div class="header-section">
+            <h1>The Conversation Cure</h1>
+            <h2>How 55 Minutes of Phone-Free Walking Can End Your Stress & Isolation</h2>
+        </div>
+        
+        <div class="pain-hook">
+            <h3>When's the last time you had a real conversation?</h3>
+            <ul class="pain-points">
+                <li>Scrolling your phone instead of connecting with people around you?</li>
+                <li>Having the same surface-level small talk every day?</li>
+                <li>Feeling lonely even when surrounded by others?</li>
+                <li>Stressed out with no one who really gets what you're going through?</li>
+                <li>Missing the deep friendships you used to have?</li>
+            </ul>
+        </div>
+        
+        <div class="solution-text">
+            <strong>You're not broken. You're disconnected.</strong><br>
+            And there's a simple cure that doesn't involve therapy, apps, or expensive programs.
+        </div>
+        
+        <div class="stats-box">
+            <div class="stat">Harvard Study: Face-to-face conversation reduces stress hormones by 68%</div>
+            <div style="font-size: 0.9rem; margin-top: 0.5rem;">Walking + talking = the most underused wellness tool</div>
+        </div>
+        
+        <div class="cover-footer">Coach E. Bell | Former Pro Athlete | Connection & Wellness Specialist</div>
+    </div>
+    
+    <!-- Page 2 - The Method -->
+    <div class="page content-page">
+        <h2 class="section-header">The Step & Connect Method</h2>
+        <p class="section-subtitle">"What therapy costs $150/hour to do, nature does for free"</p>
+        
+        <div class="method-intro">
+            <h3>Why This Works When Nothing Else Does</h3>
+            <p><strong>No phones. No distractions. No agenda.</strong> Just two people walking and talking like humans used to do. Walking releases endorphins, reduces cortisol, and creates the perfect environment for authentic conversation.</p>
+            <p>I discovered this during my own transition from professional sports. Traditional therapy felt clinical. The gym felt isolating. But walking and talking? That felt like healing.</p>
+        </div>
+        
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h4>🚶‍♀️ Phone-Free Movement<br>(First 10 mins)</h4>
+                <p>Walk at conversation pace. No fitness goals, no pressure. Just movement that calms your nervous system.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h4>💬 Guided Conversation<br>(30-35 mins)</h4>
+                <p>Using proven conversation starters that go deeper than "How's work?" Real connection happens here.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h4>🧘 Reflection Reset<br>(10 mins)</h4>
+                <p>Process insights, set one small intention, leave feeling lighter and more connected.</p>
+            </div>
+        </div>
+        
+        <div class="sample-prompt">
+            <h4>Sample Conversation Starters We Use:</h4>
+            <div class="prompt-examples">
+                <ul>
+                    <li>"What's something you're excited about that you haven't told anyone yet?"</li>
+                    <li>"If stress wasn't a factor, what would you do differently this month?"</li>
+                    <li>"What's a small win you had this week that no one noticed?"</li>
+                    <li>"When do you feel most like yourself?"</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="callout-box">
+            "After just one session, 89% of participants said they felt 'significantly less alone' and had at least one breakthrough insight."
+        </div>
+    </div>
+    
+    <!-- Page 3 - Urgent CTA -->
+    <div class="page cta-page">
+        <h1>Stop Waiting for Connection to Find You</h1>
+        
+        <div class="urgency-text">
+            🚨 Tampa Pilot Program: Only 8 Founding Member Spots Remaining
+        </div>
+        
+        <p>You could spend months trying to find the right therapist, years hoping friendships deepen naturally, or decades wondering why you feel so disconnected. Or you could try something different today.</p>
+        
+        <div class="offer-container">
+            <div class="limited-badge">Limited Time Pilot</div>
+            <div class="offer-title">Your First Step & Connect Session</div>
+            
+            <div class="price-comparison">
+                <div class="price-highlight">$20</div>
+                <div class="price-comparison-text">vs. $150+ therapy session | vs. $0 scrolling your phone alone</div>
+            </div>
+            
+            <div class="session-details">
+                <h5>What You Get in 55 Minutes:</h5>
+                <ul>
+                    <li>Phone-free walking in a safe Tampa location</li>
+                    <li>Guided conversation with proven prompts</li>
+                    <li>Personal insights and reflection time</li>
+                    <li>Action step to continue connection at home</li>
+                    <li>Zero pressure, maximum presence</li>
+                </ul>
+            </div>
+        </div>
+        
+        <button class="cta-button">Reserve Your Session Now</button>
+        <div class="guarantee">If you don't feel more connected after 55 minutes, it's free.</div>
+        
+        <p style="margin-top: 1.5rem; font-size: 1rem; opacity: 0.9;">
+            Text "CONNECT" to (813) 555-STEP or visit StepAndConnect.com
+        </p>
+    </div>
+</body>
+</html>
